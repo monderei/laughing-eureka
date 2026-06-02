@@ -66,11 +66,20 @@ class Dataset():
     def loadingAction(self):
         print(f'Loading dataset {self.dataset_name} with {self.dataset_size} rows...')
 
-    
+class TrainingPipeline():
+    def executeCommand(self, model_obj, data_set_obj):
+        data_set_obj.summaryAction()
+        model_obj.trainModel()
+        model_obj.evaluateModel()
+        model_obj.deployModel()
 
 
 
-AI_2 = RegressorModel("OGPT-2", 80, False)
-AI_2.trainModel()
-
-            
+ds1 = Dataset("Customer_Churn", 2000)
+classifier = ClassifierModel("OGPT-3", 0)
+regressor = RegressorModel("TrendPredictor", 0)
+pipeline = TrainingPipeline()
+print("--- RUNNING CLASSIFIER PIPELINE ---")
+pipeline.executeCommand(classifier, ds1)
+print("\n--- RUNNING REGRESSOR PIPELINE ---")
+pipeline.executeCommand(regressor, ds1)           
