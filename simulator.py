@@ -30,11 +30,15 @@ class ClassifierModel(Model):
         print("Determining training accuracy...")
         random_no = random.randint(0,100)
         if random_no < 50:
-            print(f"Classification Model training - {random_no}% accuracy. Model training fail.")
             self.status = False
+            self.accuracy = random_no
+            print(f"Classification Model training - {self.accuracy}% accuracy. Model training fail.")
+
         else:
-            print(f"Classification Model training - {random_no}% accuracy. Model training success.")
             self.status = True
+            self.accuracy = random_no
+            print(f"Classification Model training - {self.accuracy}% accuracy. Model training success.")
+            
 
 class RegressorModel(Model):
     def __init__(self, name, accuracy, status=False):
@@ -48,6 +52,20 @@ class RegressorModel(Model):
     def evaluateModel(self):
         error_rate = round(random.uniform(0.0, 0.25), 2)
         print(f"Regresion Evaluation - Error Rate: {error_rate}")
+    
+class Dataset():
+    def __init__(self, dataset_name, dataset_size):
+        self.dataset_name = dataset_name
+        self.dataset_size = dataset_size        
+        self._column_names = ['age', 'income', 'gender']
+
+    def summaryAction(self):
+        self.loadingAction()
+        print(f'Name of dataset: {self.dataset_name}\nSize of dataset: {self.dataset_size}\nColumn names: {self._column_names}')
+
+    def loadingAction(self):
+        print(f'Loading dataset {self.dataset_name} with {self.dataset_size} rows...')
+
     
 
 
